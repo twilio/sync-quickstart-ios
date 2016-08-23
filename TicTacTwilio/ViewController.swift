@@ -26,22 +26,14 @@ class ViewController: UIViewController {
         SyncManager.sharedManager.login()
 
         let gameBoardName = "sync.game"
-        if let syncClient = SyncManager.sharedManager.syncClient {
-            syncClient.openDocumentWithIdentifier(
-                gameBoardName,
+        if let syncClient = SyncManager.sharedManager.syncClient,
+            let options = TWSOptions.withUniqueName(gameBoardName) {
+            syncClient.openDocumentWithOptions(
+                options,
                 delegate: self,
                 completion: { (result, document) in
                     if !result.isSuccessful() {
-                        syncClient.createDocumentWithOptions([TWSOptionUniqueName: gameBoardName],
-                            delegate: self,
-                            completion: { (result, document) in
-                                if !result.isSuccessful() {
-                                    print("TTT: error creating document: \(result.error)")
-                                } else {
-                                    self.document = document
-                                    self.updateBoardFromDocument()
-                                }
-                        })
+                        print("TTT: error creating document: \(result.error)")
                     } else {
                         self.document = document
                         self.updateBoardFromDocument()
@@ -171,17 +163,15 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: TWSDocumentDelegate {
-    func onDocument(document: TWSDocument!, resultDataUpdated data: [String : AnyObject]!, forFlowID flowId: UInt) {
-        print("@@@@@ document: \(document)")
+    func onDocument(document: TWSDocument, resultDataUpdated data: [String : AnyObject], forFlowID flowId: UInt) {
         self.updateBoardFromDocument()
     }
 
-    func onDocument(document: TWSDocument!, remoteUpdated data: [String : AnyObject]!) {
-        print("@@@@@ document: \(document)")
+    func onDocument(document: TWSDocument, remoteUpdated data: [String : AnyObject]) {
         self.updateBoardFromDocument()
     }
     
-    func onDocument(document: TWSDocument!, remoteErrorOccurred error: TWSError!) {
+    func onDocument(document: TWSDocument, remoteErrorOccurred error: TWSError) {
         print("TTT: document: \(document) error: \(error)")
     }
 }

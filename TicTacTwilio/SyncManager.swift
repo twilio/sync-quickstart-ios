@@ -6,14 +6,12 @@
 //
 
 import UIKit
-import TwilioCommon
 import TwilioSyncClient
 
 class SyncManager: NSObject {
     static let sharedManager = SyncManager()
     private override init() {}
     
-    private var accessManager : TwilioAccessManager?
     var syncClient : TwilioSyncClient?
     
     func login() {
@@ -22,11 +20,12 @@ class SyncManager: NSObject {
         }
 
         let token = generateToken()
-        self.accessManager = TwilioAccessManager(token: token, delegate: self)
         let properties = TwilioSyncClientProperties()
-        self.syncClient = TwilioSyncClient(accessManager: accessManager,
-                                      properties: properties,
-                                      delegate: self)
+        if let token = token {
+            self.syncClient = TwilioSyncClient(token: token,
+                                          properties: properties,
+                                          delegate: self)
+        }
     }
     
     func logout() {
@@ -34,7 +33,6 @@ class SyncManager: NSObject {
             syncClient.shutdown()
             self.syncClient = nil
         }
-        self.accessManager = nil
     }
     
     private func generateToken() -> String? {
@@ -53,17 +51,6 @@ class SyncManager: NSObject {
         }
         
         return token
-    }
-}
-
-extension SyncManager : TwilioAccessManagerDelegate {
-    func accessManagerTokenExpired(accessManager: TwilioAccessManager!) {
-        let token = generateToken()
-        accessManager.updateToken(token)
-    }
-    
-    func accessManager(accessManager: TwilioAccessManager!, error: NSError!) {
-        print("Error updating token: \(error)")
     }
 }
 
