@@ -20,7 +20,7 @@ class ViewController: UIViewController {
         currentBoard = emptyBoard()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         SyncManager.sharedManager.login()
@@ -28,12 +28,12 @@ class ViewController: UIViewController {
         let gameBoardName = "sync.game"
         if let syncClient = SyncManager.sharedManager.syncClient,
             let options = TWSOptions.withUniqueName(gameBoardName) {
-            syncClient.openDocumentWithOptions(
-                options,
+            syncClient.openDocument(
+                with: options,
                 delegate: self,
                 completion: { (result, document) in
-                    if !result.isSuccessful() {
-                        print("TTT: error creating document: \(result.error)")
+                    if !(result?.isSuccessful())! {
+                        print("TTT: error creating document: \(result?.error)")
                     } else {
                         self.document = document
                         self.updateBoardFromDocument()
@@ -42,8 +42,8 @@ class ViewController: UIViewController {
         }
     }
     
-    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
         self.boardCollectionView.collectionViewLayout.invalidateLayout()
     }
     
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
         ]
     }
     
-    func nextValueFor(currentValue: String) -> String {
+    func nextValueFor(_ currentValue: String) -> String {
         var newValue = ""
         if currentValue == "" {
             newValue = "X"
@@ -75,27 +75,27 @@ class ViewController: UIViewController {
             } else {
                 self.currentBoard = emptyBoard()
             }
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 self.boardCollectionView.reloadData()
             })
         }
     }
     
-    func toggleSquareAtRow(row: Int, column col: Int) {
+    func toggleSquareAtRow(_ row: Int, column col: Int) {
         let newValue = nextValueFor(currentBoard[row][col])
         currentBoard[row][col] = newValue
 
         let newData = ["board": currentBoard]
         document?.setData(newData, flowId: 1, completion: { (result) in
-            if !result.isSuccessful() {
-                print("TTT: error updating the board: \(result.error)")
+            if !(result?.isSuccessful())! {
+                print("TTT: error updating the board: \(result?.error)")
             }
         })
     }
 }
 
 extension ViewController: UICollectionViewDelegate {
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let row = indexPath.row / 3
         let col = indexPath.row % 3
         
@@ -104,36 +104,36 @@ extension ViewController: UICollectionViewDelegate {
 }
 
 extension ViewController: UICollectionViewDataSource {
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3*3
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier("Square", forIndexPath: indexPath)
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Square", for: indexPath)
         let label = cell.viewWithTag(100) as! UILabel
         
         if self.document != nil {
             let row = indexPath.row / 3
             let col = indexPath.row % 3
             
-            cell.backgroundColor = UIColor.whiteColor()
+            cell.backgroundColor = UIColor.white
             label.text = currentBoard[row][col]
         } else {
-            cell.backgroundColor = UIColor.lightGrayColor()
+            cell.backgroundColor = UIColor.lightGray
             label.text = ""
         }
 
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         switch kind {
         case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Header", forIndexPath: indexPath)
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
             return headerView
             
         case UICollectionElementKindSectionFooter:
-            let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "Footer", forIndexPath: indexPath)
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath)
             let label = footerView.viewWithTag(200) as! UILabel
             if self.document != nil {
                 label.text = "Sync is initialized"
@@ -149,12 +149,12 @@ extension ViewController: UICollectionViewDataSource {
 }
 
 extension ViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let squareSize = self.squareSize(collectionView)
         return CGSize(width: squareSize, height: squareSize)
     }
     
-    func squareSize(collectionView: UICollectionView) -> CGFloat {
+    func squareSize(_ collectionView: UICollectionView) -> CGFloat {
         let margin : CGFloat = 40
         let squareSize = round(min(((collectionView.bounds.width - margin) / 3),
             ((collectionView.bounds.height - margin) / 3)))
@@ -163,15 +163,15 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: TWSDocumentDelegate {
-    func onDocument(document: TWSDocument, resultDataUpdated data: [String : AnyObject], forFlowID flowId: UInt) {
+    func onDocument(_ document: TWSDocument, resultDataUpdated data: [String : Any], forFlowID flowId: UInt) {
         self.updateBoardFromDocument()
     }
 
-    func onDocument(document: TWSDocument, remoteUpdated data: [String : AnyObject]) {
+    func onDocument(_ document: TWSDocument, remoteUpdated data: [String : Any]) {
         self.updateBoardFromDocument()
     }
     
-    func onDocument(document: TWSDocument, remoteErrorOccurred error: TWSError) {
+    func onDocument(_ document: TWSDocument, remoteErrorOccurred error: TWSError) {
         print("TTT: document: \(document) error: \(error)")
     }
 }

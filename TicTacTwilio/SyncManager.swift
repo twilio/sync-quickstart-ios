@@ -10,7 +10,7 @@ import TwilioSyncClient
 
 class SyncManager: NSObject {
     static let sharedManager = SyncManager()
-    private override init() {}
+    fileprivate override init() {}
     
     var syncClient : TwilioSyncClient?
     
@@ -35,15 +35,15 @@ class SyncManager: NSObject {
         }
     }
     
-    private func generateToken() -> String? {
-        let identifierForVendor = UIDevice.currentDevice().identifierForVendor?.UUIDString
+    fileprivate func generateToken() -> String? {
+        let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString
         let urlString = "http://localhost:4567/token?device=\(identifierForVendor!)"
         
         var token : String?
         do {
-            if let url = NSURL(string: urlString),
-                data = NSData(contentsOfURL: url),
-                result = try NSJSONSerialization.JSONObjectWithData(data, options: []) as? [String: AnyObject] {
+            if let url = URL(string: urlString),
+                let data = try? Data(contentsOf: url),
+                let result = try JSONSerialization.jsonObject(with: data, options: []) as? [String: AnyObject] {
                 token = result["token"] as? String
             }
         } catch {
