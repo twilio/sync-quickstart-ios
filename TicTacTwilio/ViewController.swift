@@ -110,40 +110,37 @@ extension ViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Square", for: indexPath)
-        let label = cell.viewWithTag(100) as! UILabel
-        
-        if self.document != nil {
-            let row = indexPath.row / 3
-            let col = indexPath.row % 3
-            
-            cell.backgroundColor = UIColor.white
-            label.text = currentBoard[row][col]
-        } else {
-            cell.backgroundColor = UIColor.lightGray
-            label.text = ""
+
+        if let label = cell.viewWithTag(100) as! UILabel? {
+            if self.document != nil {
+                let row = indexPath.row / 3
+                let col = indexPath.row % 3
+                
+                cell.backgroundColor = UIColor.white
+                label.text = currentBoard[row][col]
+            } else {
+                cell.backgroundColor = UIColor.lightGray
+                label.text = ""
+            }
         }
 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        switch kind {
-        case UICollectionElementKindSectionHeader:
-            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
-            return headerView
-            
-        case UICollectionElementKindSectionFooter:
+        if (kind == UICollectionElementKindSectionFooter) {
             let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Footer", for: indexPath)
-            let label = footerView.viewWithTag(200) as! UILabel
-            if self.document != nil {
-                label.text = "Sync is initialized"
-            } else {
-                label.text = "Sync is not yet initialized"
+            if let label = footerView.viewWithTag(200) as! UILabel? {
+                if self.document != nil {
+                    label.text = "Sync is initialized"
+                } else {
+                    label.text = "Sync is not yet initialized"
+                }
             }
             return footerView
-            
-        default:
-            assert(false, "Unexpected element kind")
+        } else {
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Header", for: indexPath)
+            return headerView
         }
     }
 }
