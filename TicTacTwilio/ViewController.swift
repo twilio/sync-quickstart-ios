@@ -25,7 +25,7 @@ class ViewController: UIViewController {
         
         SyncManager.sharedManager.login()
 
-        let gameBoardName = "sync.game"
+        let gameBoardName = "SyncGame"
         if let syncClient = SyncManager.sharedManager.syncClient,
             let options = TWSOpenOptions.withUniqueName(gameBoardName) {
             syncClient.openDocument(
