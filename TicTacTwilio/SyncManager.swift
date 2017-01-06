@@ -2,7 +2,7 @@
 //  SyncManager.swift
 //  TicTacTwilio
 //
-//  Copyright © 2011-2016 Twilio, Inc. All rights reserved.
+//  Copyright (c) 2017 Twilio, Inc. All rights reserved.
 //
 
 import UIKit
