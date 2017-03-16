@@ -3,7 +3,7 @@
 //  TicTacTwilio
 //
 //  Created by Randy Beiter on 8/18/16.
-//  Copyright © 2016 Twilio, Inc. All rights reserved.
+//  Copyright (c) 2017 Twilio, Inc. All rights reserved.
 //
 
 import UIKit

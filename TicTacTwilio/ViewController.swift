@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  TicTacTwilio
 //
-//  Copyright © 2016 Twilio, Inc. All rights reserved.
+//  Copyright (c) 2017 Twilio, Inc. All rights reserved.
 //
 
 import UIKit
