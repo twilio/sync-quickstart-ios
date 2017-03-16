@@ -36,8 +36,7 @@ class SyncManager: NSObject {
     }
     
     fileprivate func generateToken() -> String? {
-        let identifierForVendor = UIDevice.current.identifierForVendor?.uuidString
-        let urlString = "http://localhost:4567/token?device=\(identifierForVendor!)"
+        let urlString = "http://localhost:4567/token"
         
         var token : String?
         do {
