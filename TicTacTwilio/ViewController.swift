@@ -32,7 +32,7 @@ class ViewController: UIViewController {
                     delegate: self,
                     completion: { (result, document) in
                         if !(result?.isSuccessful())! {
-                            print("TTT: error creating document: \(result?.error)")
+                            print("TTT: error creating document: \(String(describing: result?.error))")
                         } else {
                             self.document = document
                             self.updateBoardFromDocument()
@@ -89,7 +89,7 @@ class ViewController: UIViewController {
         let newData = ["board": currentBoard]
         document?.setData(newData, flowId: 1, completion: { (result) in
             if !(result?.isSuccessful())! {
-                print("TTT: error updating the board: \(result?.error)")
+                print("TTT: error updating the board: \(String(describing: result?.error))")
             }
         })
     }

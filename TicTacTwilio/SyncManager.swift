@@ -24,7 +24,7 @@ class SyncManager: NSObject {
         if let token = token {
             TwilioSyncClient.syncClient(withToken: token, properties: properties, delegate: self, completion: { (result, syncClient) in
                 if !(result?.isSuccessful())! {
-                    print("TTT: error creating client: \(result?.error)")
+                    print("TTT: error creating client: \(String(describing: result?.error))")
                     completion(nil)
                 } else {
                     self.syncClient = syncClient
