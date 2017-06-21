@@ -14,7 +14,7 @@ class SyncManager: NSObject {
     
     var syncClient : TwilioSyncClient?
     
-    func login() {
+    func login(completion: @escaping (_ syncClient: TwilioSyncClient?) -> Void) {
         if self.syncClient != nil {
             logout()
         }
@@ -22,9 +22,15 @@ class SyncManager: NSObject {
         let token = generateToken()
         let properties = TwilioSyncClientProperties()
         if let token = token {
-            self.syncClient = TwilioSyncClient(token: token,
-                                          properties: properties,
-                                          delegate: self)
+            TwilioSyncClient.syncClient(withToken: token, properties: properties, delegate: self, completion: { (result, syncClient) in
+                if !(result?.isSuccessful())! {
+                    print("TTT: error creating client: \(String(describing: result?.error))")
+                    completion(nil)
+                } else {
+                    self.syncClient = syncClient
+                    completion(syncClient)
+                }
+            })
         }
     }
     

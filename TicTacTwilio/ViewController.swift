@@ -23,23 +23,24 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        SyncManager.sharedManager.login()
-
-        let gameBoardName = "SyncGame"
-        if let syncClient = SyncManager.sharedManager.syncClient,
-            let options = TWSOpenOptions.withUniqueName(gameBoardName) {
-            syncClient.openDocument(
-                with: options,
-                delegate: self,
-                completion: { (result, document) in
-                    if !(result?.isSuccessful())! {
-                        print("TTT: error creating document: \(result?.error)")
-                    } else {
-                        self.document = document
-                        self.updateBoardFromDocument()
-                    }
-            })
+        SyncManager.sharedManager.login() { (syncClient) in
+            let gameBoardName = "SyncGame"
+            if let syncClient = SyncManager.sharedManager.syncClient,
+                let options = TWSOpenOptions.withUniqueName(gameBoardName) {
+                syncClient.openDocument(
+                    with: options,
+                    delegate: self,
+                    completion: { (result, document) in
+                        if !(result?.isSuccessful())! {
+                            print("TTT: error creating document: \(String(describing: result?.error))")
+                        } else {
+                            self.document = document
+                            self.updateBoardFromDocument()
+                        }
+                })
+            }
         }
+
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -88,7 +89,7 @@ class ViewController: UIViewController {
         let newData = ["board": currentBoard]
         document?.setData(newData, flowId: 1, completion: { (result) in
             if !(result?.isSuccessful())! {
-                print("TTT: error updating the board: \(result?.error)")
+                print("TTT: error updating the board: \(String(describing: result?.error))")
             }
         })
     }
