@@ -31,8 +31,8 @@ class ViewController: UIViewController {
                     with: options,
                     delegate: self,
                     completion: { (result, document) in
-                        if !(result?.isSuccessful())! {
-                            print("TTT: error creating document: \(String(describing: result?.error))")
+                        if !(result.isSuccessful()) {
+                            print("TTT: error creating document: \(String(describing: result.error))")
                         } else {
                             self.document = document
                             self.updateBoardFromDocument()
@@ -88,8 +88,8 @@ class ViewController: UIViewController {
 
         let newData = ["board": currentBoard]
         document?.setData(newData, flowId: 1, completion: { (result) in
-            if !(result?.isSuccessful())! {
-                print("TTT: error updating the board: \(String(describing: result?.error))")
+            if !(result.isSuccessful()) {
+                print("TTT: error updating the board: \(String(describing: result.error))")
             }
         })
     }
@@ -161,15 +161,11 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: TWSDocumentDelegate {
-    func onDocument(_ document: TWSDocument, resultDataUpdated data: [String : Any], forFlowID flowId: UInt) {
+    func onDocumentResultUpdated(_ document: TWSDocument, forFlowID flowId: UInt) {
         self.updateBoardFromDocument()
     }
 
     func onDocument(_ document: TWSDocument, remoteUpdated data: [String : Any]) {
         self.updateBoardFromDocument()
-    }
-    
-    func onDocument(_ document: TWSDocument, remoteErrorOccurred error: TWSError) {
-        print("TTT: document: \(document) error: \(error)")
     }
 }
