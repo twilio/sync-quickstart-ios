@@ -1,5 +1,5 @@
 source 'https://github.com/twilio/cocoapod-specs'
 
 target 'TicTacTwilio' do
-  pod 'TwilioSyncClient', '~> 0.6.0'
+  pod 'TwilioSyncClient', '~> 0.7.0'
 end

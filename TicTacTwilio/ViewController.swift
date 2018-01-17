@@ -87,7 +87,7 @@ class ViewController: UIViewController {
         currentBoard[row][col] = newValue
 
         let newData = ["board": currentBoard]
-        document?.setData(newData, flowId: 1, completion: { (result) in
+        document?.setData(newData, metadata: nil, completion: { (result, updatedData) in
             if !(result.isSuccessful()) {
                 print("TTT: error updating the board: \(String(describing: result.error))")
             }
@@ -161,11 +161,7 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: TWSDocumentDelegate {
-    func onDocumentResultUpdated(_ document: TWSDocument, forFlowID flowId: UInt) {
-        self.updateBoardFromDocument()
-    }
-
-    func onDocument(_ document: TWSDocument, remoteUpdated data: [String : Any]) {
+    func onDocument(_ document: TWSDocument, updated data: [String : Any], eventContext: TWSEventContext) {
         self.updateBoardFromDocument()
     }
 }
