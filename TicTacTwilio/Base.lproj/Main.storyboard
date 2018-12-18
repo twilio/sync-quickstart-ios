@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -15,67 +18,80 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Jgy-ee-GJB">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
-                                <color key="backgroundColor" red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="-4" y="20" width="383" height="647"/>
+                                <color key="backgroundColor" red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ULY-lP-Rjg">
-                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="itemSize" width="100" height="100"/>
                                     <size key="headerReferenceSize" width="50" height="50"/>
                                     <size key="footerReferenceSize" width="50" height="50"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Square" id="5h4-2E-x2c">
-                                        <rect key="frame" x="0.0" y="50" width="50" height="50"/>
+                                        <rect key="frame" x="0.0" y="50" width="100" height="100"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="pdf-X0-NRw">
-                                                    <rect key="frame" x="-54.5" y="16" width="159.5" height="18"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="250"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Suu-5Q-zJc">
+                                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" tag="100" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="X" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="pdf-X0-NRw">
+                                                            <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="250"/>
+                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="pdf-X0-NRw" secondAttribute="bottom" constant="8" id="BKU-ZQ-Atj"/>
+                                                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pdf-X0-NRw" secondAttribute="trailing" constant="8" id="GQL-HX-Gd5"/>
+                                                        <constraint firstItem="pdf-X0-NRw" firstAttribute="centerX" secondItem="Suu-5Q-zJc" secondAttribute="centerX" id="Mn0-1Z-xpx"/>
+                                                        <constraint firstItem="pdf-X0-NRw" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Suu-5Q-zJc" secondAttribute="leading" constant="8" id="N6s-3N-dbs"/>
+                                                        <constraint firstItem="pdf-X0-NRw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Suu-5Q-zJc" secondAttribute="top" constant="8" id="SEY-W5-Ssv"/>
+                                                        <constraint firstItem="pdf-X0-NRw" firstAttribute="centerY" secondItem="Suu-5Q-zJc" secondAttribute="centerY" id="jhE-cc-JrS"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                         <constraints>
-                                            <constraint firstItem="pdf-X0-NRw" firstAttribute="centerX" secondItem="5h4-2E-x2c" secondAttribute="centerX" id="2D2-xA-9HA"/>
-                                            <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="pdf-X0-NRw" secondAttribute="bottom" constant="8" id="YwW-7w-2gI"/>
-                                            <constraint firstItem="pdf-X0-NRw" firstAttribute="centerY" secondItem="5h4-2E-x2c" secondAttribute="centerY" id="fXK-Ja-850"/>
-                                            <constraint firstItem="pdf-X0-NRw" firstAttribute="top" relation="greaterThanOrEqual" secondItem="5h4-2E-x2c" secondAttribute="topMargin" constant="8" id="vvp-k0-Ng1"/>
+                                            <constraint firstItem="Suu-5Q-zJc" firstAttribute="top" secondItem="5h4-2E-x2c" secondAttribute="top" id="DiX-bZ-Nes"/>
+                                            <constraint firstItem="Suu-5Q-zJc" firstAttribute="leading" secondItem="5h4-2E-x2c" secondAttribute="leading" id="SaO-c3-1ni"/>
+                                            <constraint firstAttribute="trailing" secondItem="Suu-5Q-zJc" secondAttribute="trailing" id="apR-60-kzK"/>
+                                            <constraint firstAttribute="bottom" secondItem="Suu-5Q-zJc" secondAttribute="bottom" id="vip-YG-GPN"/>
                                         </constraints>
                                     </collectionViewCell>
                                 </cells>
                                 <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Header" id="LNK-gH-XIv">
-                                    <rect key="frame" x="0.0" y="0.0" width="600" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tic-Tac-Twilio" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kgr-0S-aQI">
-                                            <rect key="frame" x="235.5" y="13" width="129" height="23"/>
+                                            <rect key="frame" x="127" y="13.5" width="129" height="23"/>
                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                            <color key="textColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.89999997615814209" green="0.89999997615814209" blue="0.89999997615814209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Kgr-0S-aQI" firstAttribute="centerX" secondItem="LNK-gH-XIv" secondAttribute="centerX" id="PnR-E6-vEl"/>
-                                        <constraint firstItem="Kgr-0S-aQI" firstAttribute="centerY" secondItem="LNK-gH-XIv" secondAttribute="centerY" id="Y4C-jx-mBj"/>
+                                        <constraint firstItem="Kgr-0S-aQI" firstAttribute="centerY" secondItem="LNK-gH-XIv" secondAttribute="centerY" id="9P1-Rx-580"/>
+                                        <constraint firstItem="Kgr-0S-aQI" firstAttribute="centerX" secondItem="LNK-gH-XIv" secondAttribute="centerX" id="PHC-cd-Y0z"/>
                                     </constraints>
                                 </collectionReusableView>
                                 <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Footer" id="Ze8-N9-Vl2">
-                                    <rect key="frame" x="0.0" y="100" width="600" height="50"/>
+                                    <rect key="frame" x="0.0" y="150" width="383" height="50"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="200" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFx-TP-qLN">
-                                            <rect key="frame" x="300" y="24.5" width="0.0" height="0.0"/>
+                                            <rect key="frame" x="191.5" y="25" width="0.0" height="0.0"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                            <color key="textColor" white="0.90000000000000002" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="0.89999997615814209" green="0.89999997615814209" blue="0.89999997615814209" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
@@ -90,7 +106,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.16862745098039217" green="0.16862745098039217" blue="0.16862745098039217" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Jgy-ee-GJB" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="-20" id="2JB-2X-5s1"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Jgy-ee-GJB" secondAttribute="trailing" constant="-20" id="BaA-BZ-gL8"/>
@@ -120,7 +136,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="305" y="387"/>
+            <point key="canvasLocation" x="304.80000000000001" y="386.35682158920542"/>
         </scene>
     </scenes>
 </document>
