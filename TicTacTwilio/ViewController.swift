@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.boardCollectionView.contentInset = UIEdgeInsetsMake(8, 8, 8, 8)
+        self.boardCollectionView.contentInset = UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
         currentBoard = emptyBoard()
     }
     
