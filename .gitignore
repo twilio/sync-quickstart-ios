@@ -9,7 +9,9 @@ Thumbs.db
 
 *.xccheckout
 !*.xcworkspacedata
+*.xcworkspace
 
 # build folders
 xcuserdata/
 build/
+Pods/

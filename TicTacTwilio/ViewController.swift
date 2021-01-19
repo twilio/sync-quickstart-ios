@@ -31,7 +31,7 @@ class ViewController: UIViewController {
                     with: options,
                     delegate: self,
                     completion: { (result, document) in
-                        if !(result.isSuccessful()) {
+                        if !result.isSuccessful {
                             print("TTT: error creating document: \(String(describing: result.error))")
                         } else {
                             self.document = document
@@ -70,7 +70,7 @@ class ViewController: UIViewController {
     
     func updateBoardFromDocument() {
         if let document = document {
-            let data = document.getData()
+            let data = document.data
             if let board = data["board"] as? [[String]] {
                 self.currentBoard = board
             } else {
@@ -88,7 +88,7 @@ class ViewController: UIViewController {
 
         let newData = ["board": currentBoard]
         document?.setData(newData, metadata: nil, completion: { (result, updatedData) in
-            if !(result.isSuccessful()) {
+            if !result.isSuccessful {
                 print("TTT: error updating the board: \(String(describing: result.error))")
             }
         })
