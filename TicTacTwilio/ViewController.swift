@@ -161,7 +161,11 @@ extension ViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension ViewController: TWSDocumentDelegate {
-    func onDocument(_ document: TWSDocument, updated data: [String : Any], eventContext: TWSEventContext) {
+
+    func onDocument(_ document: TWSDocument,
+                    updated data: [String : Any],
+                    previousData: [String : Any],
+                    eventContext: TWSEventContext) {
         self.updateBoardFromDocument()
     }
 }
