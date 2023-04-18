@@ -8,18 +8,8 @@ What you'll minimally need to get started:
 
 - A clone of this repository
 - A running instance of the backend quickstart of your choice ([Ruby](https://github.com/TwilioDevEd/sync-quickstart-ruby), [Python](https://github.com/TwilioDevEd/sync-quickstart-python), [Node.js](https://github.com/TwilioDevEd/sync-quickstart-node), [Java](https://github.com/TwilioDevEd/sync-quickstart-java), [C#](https://github.com/TwilioDevEd/sync-quickstart-csharp), or [PHP](https://github.com/TwilioDevEd/sync-quickstart-php)) to issue [Access Tokens](https://www.twilio.com/docs/api/sync/identity-and-access-tokens)
-- Cocoapods
 
 ## Building
-
-### Installing the Cocoapods
-
-Run
-```
-pod install
-```
-
-After the cocoapod installs, be sure you use the new xcworkspace file, not the xcodeproj file, to open the project.
 
 ### Wire in your Token Service
 
