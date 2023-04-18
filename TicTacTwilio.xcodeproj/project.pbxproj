@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,6 +14,7 @@
 		58B9E44D1D6619350026FB8F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 58B9E44B1D6619350026FB8F /* LaunchScreen.storyboard */; };
 		58B9E4591D66534D0026FB8F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 58B9E4581D66534D0026FB8F /* libc++.tbd */; };
 		58B9E45B1D6653760026FB8F /* SyncManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58B9E45A1D6653750026FB8F /* SyncManager.swift */; };
+		C44E22D429EE7A160021EB8D /* TwilioSyncClient in Frameworks */ = {isa = PBXBuildFile; productRef = C44E22D329EE7A160021EB8D /* TwilioSyncClient */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C44E22D429EE7A160021EB8D /* TwilioSyncClient in Frameworks */,
 				58B9E4591D66534D0026FB8F /* libc++.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,6 +89,9 @@
 			dependencies = (
 			);
 			name = TicTacTwilio;
+			packageProductDependencies = (
+				C44E22D329EE7A160021EB8D /* TwilioSyncClient */,
+			);
 			productName = TicTacTwilio;
 			productReference = 58B9E43F1D6619350026FB8F /* TicTacTwilio.app */;
 			productType = "com.apple.product-type.application";
@@ -117,6 +122,9 @@
 				Base,
 			);
 			mainGroup = 58B9E4361D6619350026FB8F;
+			packageReferences = (
+				C44E22D229EE7A160021EB8D /* XCRemoteSwiftPackageReference "twilio-sync-ios" */,
+			);
 			productRefGroup = 58B9E4401D6619350026FB8F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -219,7 +227,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -270,10 +278,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -289,7 +298,10 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TicTacTwilio/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.snyc.demo.TicTacTwilio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -304,7 +316,10 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = TicTacTwilio/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.twilio.snyc.demo.TicTacTwilio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -332,6 +347,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C44E22D229EE7A160021EB8D /* XCRemoteSwiftPackageReference "twilio-sync-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twilio/twilio-sync-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C44E22D329EE7A160021EB8D /* TwilioSyncClient */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C44E22D229EE7A160021EB8D /* XCRemoteSwiftPackageReference "twilio-sync-ios" */;
+			productName = TwilioSyncClient;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 58B9E4371D6619350026FB8F /* Project object */;
 }
