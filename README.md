@@ -13,7 +13,7 @@ What you'll minimally need to get started:
 
 ### Wire in your Token Service
 
-Set the value of `urlString` in the SyncManager.swift file to point to a valid Access-Token server. If you're using one of the quickstarts to provide tokens, you'll probably want to use [`ngrok`](http://ngrok.io) to direct a publicly-accessible URL to your localhost service.
+Set the value of `urlString` in the `SyncManager.swift` file to point to a valid Access-Token server. If you're using one of the quickstarts to provide tokens, you'll probably want to use [`ngrok`](http://ngrok.io) to direct a publicly-accessible URL to your localhost service.
 
 ```bash
 $ ngrok http localhost:4567
