@@ -9,7 +9,11 @@ import UIKit
 import TwilioSyncClient
 
 class ViewController: UIViewController {
+
+    static let gameBoardName = "SyncGame"
+
     @IBOutlet weak var boardCollectionView: UICollectionView!
+
     var document : TWSDocument?
     var currentBoard:[[String]] = []
 
@@ -19,28 +23,28 @@ class ViewController: UIViewController {
         self.boardCollectionView.contentInset = UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
         currentBoard = emptyBoard()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        SyncManager.sharedManager.login() { (syncClient) in
-            let gameBoardName = "SyncGame"
-            if let syncClient = SyncManager.sharedManager.syncClient,
-                let options = TWSOpenOptions.withUniqueName(gameBoardName) {
-                syncClient.openDocument(
-                    with: options,
-                    delegate: self,
-                    completion: { (result, document) in
-                        if !result.isSuccessful {
-                            print("TTT: error creating document: \(String(describing: result.error))")
-                        } else {
-                            self.document = document
-                            self.updateBoardFromDocument()
-                        }
-                })
+
+        Task<Void, Never> {
+            do {
+                let syncClient = try await SyncManager.sharedManager.login()
+                let options = TWSOpenOptions.withUniqueName(Self.gameBoardName)!
+
+                let (result, document) = await syncClient.openDocument(with: options, delegate: self)
+
+                guard result.isSuccessful else {
+                    print("TTT: error creating document: \(String(describing: result.error))")
+                    return
+                }
+
+                self.document = document
+                self.updateBoardFromDocument()
+            } catch {
+                print("TTT: error occurred \(error)")
             }
         }
-
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -106,7 +110,7 @@ extension ViewController: UICollectionViewDelegate {
 
 extension ViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3*3
+        return 3 * 3
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
